@@ -42,6 +42,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseDefaultFiles();   // ADDED: lets the backend show the React website
+app.UseStaticFiles();    // ADDED: lets the backend show the React website
+
 app.UseCors("ReactFrontend");
 
 app.UseAuthorization();
@@ -57,5 +60,7 @@ app.MapGet("/api/protected", () =>
     });
 })
 .RequireAuthorization();
+
+app.MapFallbackToFile("index.html");   // ADDED: opens the React website at the main link
 
 app.Run();
